@@ -1,30 +1,124 @@
-# projet
-projet système d'exploitation
+<h1>Matrix Multiplication using Producer-Consumer Model</h1>
 
-On veut effectuer en parallèle(En utilisant le modèle producteurs/consommateur) le produit de deux matrices: 
-B (n1* m1)  et C (n2 * m2) ⇒ la matrice résultante A=B*C ;
+<p>This C code demonstrates matrix multiplication utilizing a producer-consumer model implemented with pthreads and semaphores.</p>
 
-Les matrices sont remplis par des valeurs aléatoires
+<h2>Description</h2>
 
-Les résultats intermédiaires seront placés dans un tampon de taille “T[N]”.
+<p>The program generates two random matrices, A and B, and performs matrix multiplication (A * B) using multiple producer threads for computation and a single consumer thread to assemble the resultant matrix.</p>
 
-Chaque threads producteurs calcule une ligne de la matrice résultante A et range les résultat dans le tampon T
+<h2>Prerequisites</h2>
 
-Les threads consommateurs consomment l'élément T[y]  le place dans la matrice résultante A  au bon emplacement!
+<p>Ensure you have a C compiler installed to compile and run the code.</p>
 
-q1: Quelles sont les structures de données à utiliser ?
+<h2>Usage</h2>
 
-q2: Comment allez-vous protéger l'accès à ces données?
+<ol>
+  <li>Clone the repository or download the C file.</li>
+  <li>Compile the code using a C compiler. For example:</li>
+</ol>
 
-q3- quels sont les risques?
+<pre><code>gcc -o matrix_multiplication matrix_multiplication.c -pthread
+</code></pre>
 
-1-Cloner le projet github : projet  ; et le modifier le selon les exigences ci-dessus
+<ol start="3">
+  <li>Run the compiled executable:</li>
+</ol>
 
-2- Pour chaque nouvelle idée créer une nouvelle branche; les autres étudiants peuvent améliorer l'idée en créant une nouvelle branche!
+<pre><code>./matrix_multiplication
+</code></pre>
 
-3-Les premières réponses sont mieux notées!
+<h2>Implementation Details</h2>
 
-4-Bien gérer les éxceptions 
+<ul>
+  <li><strong>Functions:</strong></li>
+  <ul>
+    <li><code>generate()</code>: Generates random matrices A and B with specified sizes and fills them with random values. Displays the generated matrices.</li>
+    <li><code>producer()</code>: Performs the product of specific rows and columns from matrices A and B, storing the result in the buffer.</li>
+    <li><code>consumer()</code>: Retrieves data from the buffer and assembles the resultant matrix.</li>
+    <li><code>printTheResultMatrix()</code>: Displays the final resultant matrix after multiplication.</li>
+    <li><code>main()</code>: Orchestrates the generation, multiplication, and display of matrices using multiple threads and synchronization mechanisms.</li>
+  </ul>
+  <li><strong>Struct:</strong></li>
+  <ul>
+    <li><code>IndexesOfThreadsDate</code>: A custom structure used to hold row, column, and data information for thread communication and avoiding data conflict during matrix multiplication.</li>
+  </ul>
+</ul>
 
-5-Bien gérer les messages d'erreurs!
+<h2>Variables and Definitions</h2>
+Certainly! Here's an updated version of the HTML-formatted content for the README.md file, including additional details about the variables used in the provided code:
 
+html
+
+<h1>Matrix Multiplication using Producer-Consumer Model</h1>
+
+<p>This C code demonstrates matrix multiplication utilizing a producer-consumer model implemented with pthreads and semaphores.</p>
+
+<h2>Description</h2>
+
+<p>The program generates two random matrices, A and B, and performs matrix multiplication (A * B) using multiple producer threads for computation and a single consumer thread to assemble the resultant matrix.</p>
+
+<h2>Prerequisites</h2>
+
+<p>Ensure you have a C compiler installed to compile and run the code.</p>
+
+<h2>Usage</h2>
+
+<ol>
+  <li>Clone the repository or download the C file.</li>
+  <li>Compile the code using a C compiler. For example:</li>
+</ol>
+
+<pre><code>gcc -o matrix_multiplication matrix_multiplication.c -pthread
+</code></pre>
+
+<ol start="3">
+  <li>Run the compiled executable:</li>
+</ol>
+
+<pre><code>./matrix_multiplication
+</code></pre>
+
+<h2>Implementation Details</h2>
+
+<ul>
+  <li>The code uses pthreads for creating producer threads to calculate products and a consumer thread to assemble the resulting matrix.</li>
+  <li>Semaphore implementation (<code>sem_t</code>) is utilized for synchronization between threads (full, empty, and mutex semaphores).</li>
+</ul>
+
+<h2>Variables and Definitions</h2>
+
+<p><code>MIN_ROWS_COLS</code>: Minimum value for rows and columns in the randomly generated matrices.</p>
+
+<p><code>MAX_ROWS_COLS</code>: Maximum value for rows and columns in the randomly generated matrices.</p>
+
+<p><code>MAX_VALUE</code>: Maximum value for each element in the matrices.</p>
+
+<p><code>BUFFER_SIZE</code>: Size of the buffer used in the producer-consumer model.</p>
+
+<p><code>IndexesOfThreadsDate</code>: Custom data structure to avoid data conflict in the product phase.</p>
+
+<p><code>matrixA[MAX_ROWS_COLS][MAX_ROWS_COLS]</code>: Matrix A.</p>
+
+<p><code>matrixB[MAX_ROWS_COLS][MAX_ROWS_COLS]</code>: Matrix B.</p>
+
+<p><code>matrixResult[MAX_ROWS_COLS][MAX_ROWS_COLS]</code>: Resultant matrix (A * B).</p>
+
+<p><code>MatA_Rows</code>: Number of rows in matrix A.</p>
+
+<p><code>MatB_Columns</code>: Number of columns in matrix B.</p>
+
+<p><code>Mat_Brows_Acolumns</code>: Number of rows in matrix B and columns in matrix A (shared rows and columns for the multiplication).</p>
+
+<p><code>ip</code> and <code>ic</code>: Indexes for buffer management.</p>
+
+
+<h2>How to Use</h2>
+
+<ol>
+  <li>The code will generate random matrices A and B with sizes ranging from 3x3 to 6x6.</li>
+  <li>It performs matrix multiplication (A * B) using the producer-consumer model.</li>
+  <li>The final resultant matrix will be displayed as output.</li>
+</ol>
+
+
+<p>Feel free to modify, enhance, or use it for educational purposes!</p>
