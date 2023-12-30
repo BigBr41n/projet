@@ -1,8 +1,5 @@
-<!DOCTYPE html>
+
 <html>
-<head>
-  <title>Matrix Multiplication with Multithreading</title>
-</head>
 <body>
   <h1>Matrix Multiplication with Multithreading</h1>
   <p>This Java program performs matrix multiplication using multithreading. It utilizes threads to multiply matrices concurrently, enhancing the performance for larger matrices.</p>
